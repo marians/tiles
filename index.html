@@ -1,1 +1,175 @@
-My GitHub Page
+<html>
+<head>
+	<META http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Map Tiles Showcase</title>
+	<meta name="description" content="Page showing various map tiles from everywhere.">
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.css" />
+ 	<!--[if lte IE 8]>
+     	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.ie.css" />
+ 	<![endif]-->
+ 	<style type="text/css">
+ 	body { margin: 0;}
+ 	#map { height: 100%;}
+ 	</style>
+</head>
+<body>
+<div id="map"></div>
+<script src="http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"></script>
+<script>
+
+var basemaps = [
+	{
+		title: "OpenStreetMap",
+		urlmask: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+		attribution: '&copy; Tiles and map data: OpenStreetMap',
+		minZoom: 0,
+		maxZoom: 18
+	},
+	{
+		title: "OpenCycleMap",
+		urlmask: 'http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png',
+		attribution: '&copy; Tiles: opencyclemap.org, map data: OpenStreetMap',
+		minZoom: 3,
+		maxZoom: 18
+	},
+	{
+		title: "OpenStreetMap deutscher Stil",
+		urlmask: 'http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png',
+		attribution: '&copy; Tiles: OpenStreetMap',
+		minZoom: 5,
+		maxZoom: 15
+	},
+	{
+		title: "Google Maps",
+		urlmask: 'https://mts0.google.com/vt/hl=de&x={x}&y={y}&z={z}',
+		attribution: '&copy; Tiles: Google',
+		minZoom: 3,
+		maxZoom: 18
+	},
+	{
+		title: "Google Maps Terrain",
+		urlmask: 'https://mts0.google.com/vt/lyrs=t@129,r@183112068&hl=de&src=app&x={x}&y={y}&z={z}',
+		attribution: '&copy; Tiles: Google',
+		minZoom: 3,
+		maxZoom: 18
+	},
+	{
+		title: "Google Maps Satellite",
+		urlmask: 'https://khms0.google.de/kh/v=115&x={x}&y={y}&z={z}',
+		attribution: '&copy; Tiles: Google',
+		minZoom: 3,
+		maxZoom: 18
+	},
+	{
+		title: "MapQuest Open",
+		urlmask: 'http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png',
+		attribution: '&copy; Tiles: MapQuest, map data: OpenStreetMap',
+		minZoom: 3,
+		maxZoom: 18
+	},
+	{
+		title: "Hike and Bike Map",
+		urlmask: 'http://toolserver.org/tiles/hikebike/{z}/{x}/{y}.png',
+		attribution: '&copy; toolserver.org',
+		minZoom: 0,
+		maxZoom: 17
+	},
+	{
+		title: "Public Transport",
+		urlmask: 'http://tile.memomaps.de/tilegen/{z}/{x}/{y}.png',
+		attribution: '&copy; toolserver.org',
+		minZoom: 2,
+		maxZoom: 18
+	},
+	{
+		title: "Mapbox Streets v.3",
+		urlmask: 'http://{s}.tiles.mapbox.com/v3/mapbox.mapbox-streets/{z}/{x}/{y}.png',
+		attribution: '&copy; Tiles: MapBox, map data: OpenStreetMap',
+		minZoom: 0,
+		maxZoom: 17
+	},
+	{
+		title: "Stamen Toner",
+		urlmask: 'http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png',
+		attribution: '&copy; Tiles: Stamen, map data: OpenStreetMap',
+		minZoom: 0,
+		maxZoom: 18
+	},
+	{
+		title: "Stamen Terrain",
+		urlmask: 'http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.png',
+		attribution: '&copy; Tiles: Stamen, map data: OpenStreetMap',
+		minZoom: 0,
+		maxZoom: 18
+	},
+	{
+		title: "Stamen Watercolor",
+		urlmask: 'http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png',
+		attribution: '&copy; Tiles: Stamen, map data: OpenStreetMap',
+		minZoom: 0,
+		maxZoom: 18
+	},
+	{
+		title: "Apple iLife",
+		urlmask: 'http://gsp2.apple.com/tile?api=1&style=slideshow&layers=default&lang=de_DE&z={z}&x={x}&y={y}&v=9',
+		attribution: '&copy; Tiles: Apple, map data: OpenStreetMap',
+		minZoom: 0,
+		maxZoom: 18
+	},
+	{
+		title: "Skobbler",
+		urlmask: 'http://tiles2.skobbler.net/osm_tiles2/{z}/{x}/{y}.png',
+		attribution: '&copy; Tiles: Skobbler, map data: OpenStreetMap',
+		minZoom: 0,
+		maxZoom: 18
+	},
+	{
+		title: "Offenes Köln",
+		urlmask: 'http://{s}.ok.mycdn.de/tiles/v3/{z}/{x}/{y}.png',
+		attribution: '&copy; Tiles: Offenes Köln, map data: OpenStreetMap',
+		minZoom: 10,
+		maxZoom: 17
+	},
+	{
+		title: "Was atmest Du?",
+		urlmask: 'http://{s}.map.mycdn.de/wad/v1/{z}/{x}/{y}.png',
+		attribution: '&copy; Tiles: Marian Steinbach, map data: OpenStreetMap',
+		minZoom: 10,
+		maxZoom: 15
+	}
+	
+];
+
+var overlays = [
+	{
+		title: "Hill Shading",
+		urlmask: 'http://toolserver.org/~cmarqu/hill/{z}/{x}/{y}.png',
+		attribution: '&copy; toolserver.org',
+		minZoom: 5,
+		maxZoom: 15
+	}
+];
+
+var baseLayers = {};
+var overlayLayers = {};
+
+for (var i in basemaps) {
+	baseLayers[basemaps[i].title] = L.tileLayer(basemaps[i].urlmask, {
+    	attribution: basemaps[i].attribution,
+    	maxZoom: basemaps[i].maxZoom,
+    	minZoom: basemaps[i].minZoom
+	});
+}
+for (var i in overlays) {
+	overlayLayers[overlays[i].title] = L.tileLayer(overlays[i].urlmask, {
+    	attribution: overlays[i].attribution,
+    	maxZoom: overlays[i].maxZoom,
+    	minZoom: overlays[i].minZoom
+	});
+}
+var map = L.map('map', {layers: baseLayers[basemaps[0].title]}).setView([50.94, 6.95], 12);
+L.control.layers(baseLayers, overlayLayers).addTo(map);
+
+</script>
+</body>
+</html>
