@@ -16,13 +16,21 @@ Feel free to send pull requests for adding new layers or adding information abou
 
 The international default tiles for http://openstreetmap.org/. Tiles are rendered on demand and are very up to date (frequently only several minutes behind OSM data changes).
 
+### OpenStreetMap German
+
+Residing at http://www.openstreetmap.de/, this is a map style leaning towards conventions known in Germany.
+
 ### OpenCycleMap
 
 Map tiles especially for bicyclers, home address: http://www.opencyclemap.org/. Created by Andy Allen and Dave Stubbs. Based on OpenStreetMap data, in addition featuring height profiles in form of contour lines. More information here: http://www.thunderforest.com/opencyclemap/
 
-### OpenStreetMap deutscher Stil
+### Transport
 
-Residing at http://www.openstreetmap.de/, this is a map style leaning towards conventions known in Germany.
+More info at http://www.thunderforest.com/transport/
+
+### Landscape
+
+More info at http://www.thunderforest.com/landscape/
 
 ### Google Maps
 
@@ -44,9 +52,17 @@ More info at http://developer.mapquest.com/web/products/open/map
 
 As with Google Maps Satellite, this is not a proper map. You get the idea.
 
+Zoom levels are restricted to 0-11 in most areas. Some areas in the United States have some higher levels available.
+
+More information here: http://developer.mapquest.com/web/products/open/map
+
 ## Hike and Bike Map
 
 Tiles for http://hikebikemap.de/, a map made for hikers and bikers. 
+
+## Public Transport
+
+Home at memomaps.de, created by Melchior Moos, this map emphasises public transport routes. Rendered based on data as of September 2010, not updated since.
 
 ### Was Atmest Du
 
