@@ -36,19 +36,19 @@ More info at http://www.thunderforest.com/landscape/
 
 No need to explain. The ever-evolving Google Maps style. (c) Google plus various geodata providers.
 
-## Google Maps Terrain
+### Google Maps Terrain
 
 Google's style focusing more on the landscape than on streets. (c) Google plus various geodata providers. Terrain data used for hill shading seems to come from open sources, since it's identical with other terrain layers out there.
 
-## Google Maps Satellite
+### Google Maps Satellite
 
 This is, of course, not a map. But it's interesting for comparison, anyway.
 
-## MapQuest Open
+### MapQuest Open
 
 More info at http://developer.mapquest.com/web/products/open/map
 
-## MapQuest Aerial
+### MapQuest Aerial
 
 As with Google Maps Satellite, this is not a proper map. You get the idea.
 
@@ -56,11 +56,11 @@ Zoom levels are restricted to 0-11 in most areas. Some areas in the United State
 
 More information here: http://developer.mapquest.com/web/products/open/map
 
-## Hike and Bike Map
+### Hike and Bike Map
 
 Tiles for http://hikebikemap.de/, a map made for hikers and bikers. 
 
-## Public Transport
+### Public Transport
 
 Home at memomaps.de, created by Melchior Moos, this map emphasises public transport routes. Rendered based on data as of September 2010, not updated since.
 
