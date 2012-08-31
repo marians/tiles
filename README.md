@@ -64,6 +64,14 @@ Tiles for http://hikebikemap.de/, a map made for hikers and bikers.
 
 Home at memomaps.de, created by Melchior Moos, this map emphasises public transport routes. Rendered based on data as of September 2010, not updated since.
 
+### MapBox Streets
+
+More info at http://mapbox.com/blog/announcing-mapbox-streets/
+
+### MapBox World light
+
+More info at http://mapbox.com/blog/mapbox-light-global-base-map-alternative/
+
 ### Was Atmest Du
 
 Created by Marian Steinbach for http://www.sendung.de/was-atmest-du/. It's used mainly as a background for a map of air uality measurement stations. Important roads as well as industrial areas as a possible cause for emissions are supposed to be easily visible while other features are displayed very subtly or not at all.
