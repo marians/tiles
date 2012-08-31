@@ -26,17 +26,17 @@ var basemaps = [
 		maxZoom: 18
 	},
 	{
+		title: "OpenStreetMap German",
+		urlmask: 'http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png',
+		attribution: '&copy; Tiles: OpenStreetMap',
+		minZoom: 5,
+		maxZoom: 18
+	},
+	{
 		title: "OpenCycleMap",
 		urlmask: 'http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png',
 		attribution: '&copy; Tiles: opencyclemap.org, map data: OpenStreetMap',
 		minZoom: 3,
-		maxZoom: 18
-	},
-	{
-		title: "OpenStreetMap deutscher Stil",
-		urlmask: 'http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png',
-		attribution: '&copy; Tiles: OpenStreetMap',
-		minZoom: 5,
 		maxZoom: 18
 	},
 	{
@@ -63,6 +63,13 @@ var basemaps = [
 	{
 		title: "MapQuest Open",
 		urlmask: 'http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png',
+		attribution: '&copy; Tiles: MapQuest, map data: OpenStreetMap',
+		minZoom: 3,
+		maxZoom: 18
+	},
+	{
+		title: "MapQuest Open Aerial",
+		urlmask: 'http://oatile1.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.png',
 		attribution: '&copy; Tiles: MapQuest, map data: OpenStreetMap',
 		minZoom: 3,
 		maxZoom: 18
