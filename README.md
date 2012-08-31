@@ -72,6 +72,8 @@ More info at http://mapbox.com/blog/announcing-mapbox-streets/
 
 More info at http://mapbox.com/blog/mapbox-light-global-base-map-alternative/
 
+Use is deprecated (as of August 31, 2012). See: https://twitter.com/ericg/status/241550371112230912
+
 ### Was Atmest Du
 
 Created by Marian Steinbach for http://www.sendung.de/was-atmest-du/. It's used mainly as a background for a map of air uality measurement stations. Important roads as well as industrial areas as a possible cause for emissions are supposed to be easily visible while other features are displayed very subtly or not at all.
