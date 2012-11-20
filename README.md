@@ -76,7 +76,7 @@ Use is deprecated (as of August 31, 2012). See: https://twitter.com/ericg/status
 
 ### mySociety Mapumental
 
-Background tiles for the center piece of http://property.mapumental.com/ . The tiles have high contrast, since they are usually overlayed with a dark, semi-transparent layer. Usage policy unknown.
+Background tiles for the center piece of http://property.mapumental.com/ . The tiles have high contrast, since they are usually overlayed with a dark, semi-transparent layer. Tiles available for Great Britain. Usage policy unknown.
 
 ### Was Atmest Du
 
