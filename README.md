@@ -1,6 +1,6 @@
 This is a small collection of map background tiles and overlays simply for demonstration and comparison purposes.
 
-Go to [http://marians.github.io/tiles/](marians.github.io/tiles) to see the map viewer.
+Go to [marians.github.io/tiles/](http://marians.github.io/tiles/) to see the map viewer.
 
 Here is a related service:
 
