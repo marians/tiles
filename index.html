@@ -21,6 +21,14 @@
 
 var basemaps = [
 	{
+		// see http://climate4development.worldbank.org/open/#world-borders
+		title: "World Bank borders with english country label",
+		urlmask: "http://{s}.tiles.mapbox.com/v2/worldbank.world-bank-en/{z}/{x}/{y}.png",
+		attribution: 'World Bank',
+		minZoom: 0,
+		maxZoom: 8
+	},
+	{
 		title: "OpenStreetMap",
 		urlmask: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 		attribution: '&copy; Tiles and map data: OpenStreetMap',
