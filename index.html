@@ -3,7 +3,7 @@
 	<META http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Map Tiles Showcase</title>
 	<meta name="description" content="Page showing various map tiles from everywhere.">
-	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
  	<!--[if lte IE 8]>
      	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
  	<![endif]-->
@@ -15,7 +15,9 @@
 </head>
 <body>
 <div id="map"></div>
-<script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="js/jquery.ba-bbq.min.js"></script>
+<script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
 <script type="text/javascript" src="leaflet.zoomdisplay.js"></script>
 <script>
 
@@ -210,7 +212,7 @@ var overlays = [
 	{
 		title: "Cologne Public Transport Station Distance (overlay)",
 		urlmask: 'http://{s}.ok.mycdn.de/tiles/kvb-station-distance-overlay/v1/{z}/{x}/{y}.png',
-		attribution: '&copy; Marian Steinbach, address geodata &copy; Stadt Köln',
+		attribution: '&copy; Marian Steinbach, &copy; Address geodata: Stadt Köln',
 		minZoom: 4,
 		maxZoom: 16
 	}
@@ -233,8 +235,117 @@ for (var i in overlays) {
     	minZoom: overlays[i].minZoom
 	});
 }
-var map = L.map('map', {layers: baseLayers[basemaps[0].title]}).setView([50.94, 6.95], 12);
+//var map = L.map('map', {layers: baseLayers[basemaps[0].title]}).setView([50.94, 6.95], 12);
+var map = L.map('map');
 L.control.layers(baseLayers, overlayLayers).addTo(map);
+
+
+// make state object from URL string
+function urlToState(str) {
+	var state = {}
+	var parts = str.split("/");
+	state.x = parseFloat(parts[0]);
+	state.y = parseFloat(parts[1]);
+	state.z = parseInt(parts[2], 10);
+	state.layers = [];
+	if (parts[3]) state.layers = parts[3].split(",");
+	return state;
+}
+
+// make URL string from state object
+function stateToUrl(s) {
+	var parts = [];
+	var precision = 5;
+	parts.push(s.x.toFixed(precision).toString());
+	parts.push(s.y.toFixed(precision).toString());
+	parts.push(s.z.toString());
+	parts.push(s.layers.join(","));
+	return parts.join("/");
+}
+
+// adapt app state to URL state
+function setState(s) {
+	console.log("Setting state:", [s.y, s.x], s.z, s.layers);
+	// select layers
+	$.each(s.layers, function(n, layerId){
+		var absId = 0;
+		$.each(basemaps, function(i, basemap) {
+			absId = i;
+			if (absId == layerId) {
+				console.log("basemap:", basemap.title);
+				map.addLayer(baseLayers[basemap.title]);
+			}
+		});
+		$.each(overlays, function(i, overlay) {
+			absId++;
+			if (absId == layerId) {
+				console.log("overlay:", overlay.title, overlayLayers[overlay.title]);
+				map.addLayer(overlayLayers[overlay.title]);
+			}
+		});
+	});
+	// set x, y ,and zoom
+	map.setView([s.y, s.x], s.z);
+}
+
+// get initial state
+var fragment = $.param.fragment()
+var state = urlToState(fragment);
+console.log("fragment:", fragment);
+if (fragment !== "") {
+	setState(state);
+} else {
+	map.addLayer(baseLayers[basemaps[0].title]);
+	map.setView([50.94, 6.95], 8);
+}
+
+// return visible layer IDs
+function layerIds() {
+	var activeUrlmasks = [];
+	$.each(map._layers, function(i, item) {
+		//console.log(i, item, item._url);
+		activeUrlmasks.push(item._url);
+	});
+	var ids = [];
+	var idOffset = 0;
+	$.each(activeUrlmasks, function(i, urlmask) {
+		$.each(basemaps, function(j, basemap){
+			if (basemap.urlmask === urlmask) {
+				ids.push(j);
+			}
+			idOffset = j;
+		});
+		$.each(overlays, function(k, overlay) {
+			idOffset++;
+			if (overlay.urlmask === urlmask) {
+				ids.push(idOffset);
+			}
+		});
+	});
+	//console.log(ids);
+	return ids;
+}
+
+function viewChangeHandler(e) {
+	//console.log(map);
+	
+	var p = map.getCenter();
+    var changedState = {
+    	x: p.lng,
+    	y: p.lat,
+    	z: e.target._zoom,
+    	layers: layerIds()
+    }
+    var url = "#" + stateToUrl(changedState);
+    state = changedState;
+    jQuery.bbq.pushState(url);
+}
+
+map.on('zoomend', viewChangeHandler);
+map.on('moveend', viewChangeHandler);
+map.on("baselayerchange", viewChangeHandler);
+map.on("overlayadd", viewChangeHandler);
+map.on("overlayremove", viewChangeHandler);
 
 </script>
 </body>
